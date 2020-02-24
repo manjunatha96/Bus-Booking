@@ -15,7 +15,7 @@ Details:
        "first_name":"Manju",
         "last_name":"hubballi",
         "email":"ma@gmail.com",
-        "mobile_no":9611323824,
+        "mobile_no":"9611323824",
         "age":25,
         "amount":600,
         "is_active":true,
@@ -32,3 +32,5 @@ Details:
 
 Setp4) Paste link to get passenger’s details.
 Link -> http://localhost:3000/Booking/get
+
+Note : Bus booking can happen date wise.
