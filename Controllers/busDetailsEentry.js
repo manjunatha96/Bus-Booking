@@ -1,15 +1,17 @@
 const express=require('express');
 const router=express.Router();
 const {bus,validate}=require('../Shared/Database/BusDetails')
-const _=require('lodash')
 
 router.get('/get',async(req,res)=>{
- console.log('hii');
- 
+    let result=await bus.find()
+    .select('seat_name seat_no')
+    res.send(result)
 })
 
 router.post('/post',async(req,res)=>{
-    console.log('hello');
+    let {error} = validate(req.body)
+    if(error) return res.status(400).send(error.details[0].message)
+
     const validseat=await bus.findOne({seat_name:req.body.seat_name})
     if(validseat) res.status(400).send('This seat name already exits..')
 
@@ -20,9 +22,6 @@ router.post('/post',async(req,res)=>{
         seat_name:req.body.seat_name,
         seat_no:req.body.seat_no
     })
-    await result.save((err,docs)=>{
-        if(!err) res.send(result)
-        else console.error('Error while sendinf the data...',JSON.stringify(err,undefined,2))        
-    }) 
+    await result.save(res.send(result)) 
 })
 module.exports=router;

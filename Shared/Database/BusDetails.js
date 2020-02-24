@@ -24,7 +24,7 @@ const bus=mongoose.model('BusDetails',busSchema)
 const validatebus=function(busvalidate){
     const busdeatils={
         seat_name:Joi.string().required(),
-        seat_no:Joi.string().required()
+        seat_no:Joi.number().required()
     }
     return Joi.validate(busvalidate,busdeatils)
 }

@@ -11,8 +11,10 @@ const bookingSchema=mongoose.Schema({
         require:true
     },
     mobile_no:{
-        type:Number,
-        require:true
+        type:String,
+        require:true,
+        minlength:10,
+        maxlength:12,
     },
     email:{
         type:String,
@@ -37,6 +39,7 @@ const bookingSchema=mongoose.Schema({
     seat_id:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'BusDetails',
+        require:true,
     },
     booking_date:{
         type:Date,
@@ -49,11 +52,13 @@ const validatebooking=function(bookingvalidate){
     const bookdeatils={
         first_name:Joi.string().required(),
         last_name:Joi.string().required(),
-        mobile_no:Joi.string().required(),
-        email:Joi.string().require(),
-        age:Joi.string().require(),
-        seat_id:Joi.string().require(),
-        booking_date:Joi.string().require()        
+        mobile_no:Joi.string().min(10).max(12).required(),
+        email:Joi.string().required().email(),
+        age:Joi.number().required(),
+        seat_id:Joi.string().required(),
+        is_active:Joi.boolean().required(),
+        booking_date:Joi.string().required(),
+        amount:Joi.number().required()        
     }
     return Joi.validate(bookingvalidate,bookdeatils)
 }
